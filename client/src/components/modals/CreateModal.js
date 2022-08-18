@@ -1,8 +1,11 @@
-import React from 'react'
-import React, { useState } from 'react';
+import {React, useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+
+
 
 
 const CreateModal = () => {
@@ -14,11 +17,26 @@ const CreateModal = () => {
   const [gmEmployee, setGmEmployee] = useState("")
 
   const [errors, setErrors] = useState("");
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post("http://localhost:8000/api/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
+    .then(response => {
+      console.log('Event Created Succesfully', response);
+      // navigate("/api/calendar");
+  })
+  .catch((err) => {
+      console.log(err)
+      setErrors(err.response.data.error.errors);
+  });
+    
+  }
 
   return (
     <>
@@ -39,8 +57,8 @@ const CreateModal = () => {
           
         <Form.Group className="mb-3" controlId="gameName">
           <Form.Label>Game Name: </Form.Label>
-          <Form.Select value={gameName} aria-label="Select a game">
-            <option selected>Select a game</option>
+          <Form.Select value={gameName} onChange={(e) => setGameName(e.target.value)} aria-label="Select a game">
+            <option defaultValue>Select a game</option>
             <option value="Game 1">Game 1</option>
             <option value="Game 2">Game 2</option>
             <option value="Game 3">Game 3</option>
@@ -53,39 +71,39 @@ const CreateModal = () => {
 
         <Form.Group className="mb-3" controlId="date">
           <Form.Label>Date: </Form.Label>
-          <Form.Control value={date} type="date" placeholder="Enter Date" />
+          <Form.Control value={date} onChange={(e) => setDate(e.target.value)} type="date" placeholder="Enter Date" />
           {errors.date ? <p className="text-danger">{errors.date.message}</p> : null}
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="startTime">
           <Form.Label>Start Time: </Form.Label>
-          <Form.Control value={startTime} type="time" placeholder="Enter start time" />
+          <Form.Control value={startTime} onChange={(e) => setStartTime(e.target.value)} type="time" placeholder="Enter start time" />
           {errors.startTime ? <p className="text-danger">{errors.startTime.message}</p> : null}
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="endTime">
           <Form.Label>End Time: </Form.Label>
-          <Form.Control value={endTime} type="time" placeholder="Enter end time" />
+          <Form.Control value={endTime} onChange={(e) => setEndTime(e.target.value)} type="time" placeholder="Enter end time" />
           {errors.endTime ? <p className="text-danger">{errors.endTime.message}</p> : null}
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="host">
           <Form.Label>Host: </Form.Label>
-          <Form.Select value={hostEmployee} aria-label="Select a Host">
-            <option selected>Select a Host</option>
+          <Form.Select value={hostEmployee} onChange={(e) => setHostEmployee(e.target.value)} aria-label="Select a Host">
+            <option defaultValue>Select a Host</option>
             <option value="Employee 1">Employee 1</option>
             <option value="Employee 2">Employee 2</option>
             <option value="Employee 3">Employee 3</option>
             <option value="Employee 4">Employee 4</option>
             <option value="Employee 5">Employee 5</option>
           </Form.Select>
-          {errors.hostEmployeee ? <p className="text-danger">{errors.hostEmployeee.message}</p> : null}
+          {errors.hostEmployee ? <p className="text-danger">{errors.hostEmployee.message}</p> : null}
         </Form.Group>
         
         <Form.Group className="mb-3" controlId="gm">
           <Form.Label>Game master: </Form.Label>
-          <Form.Select value={gmEmployee} aria-label="Select a Game Master">
-            <option selected>Select a Game Master</option>
+          <Form.Select value={gmEmployee} onChange={(e) => setGmEmployee(e.target.value)} aria-label="Select a Game Master">
+            <option defaultValue>Select a Game Master</option>
             <option value="Employee 1">Employee 1</option>
             <option value="Employee 2">Employee 2</option>
             <option value="Employee 3">Employee 3</option>
@@ -94,8 +112,8 @@ const CreateModal = () => {
           </Form.Select>
           {errors.gmEmployee ? <p className="text-danger">{errors.gmEmployee.message}</p> : null}
         </Form.Group>
-          <Button variant="primary" type="submit">
-            Create
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Submit
           </Button>
         </Modal.Body>
       </Modal>
