@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const TimeBlockCardSchema = new mongoose.Schema({
     game_name: {
         type: String,
+        enum: ['Game 1','Game 2','Game 3', 'Gmae 4','Game 5'],
         required: [true, 'game name is required'],
-        minlength: [4, 'game name length should be more than 3 characters']
-    },date: {
+    },
+    date: {
         type: Date,
         required: [true, 'date is required'],
         //minlength: [5, 'date length should be more than 4 characters']
@@ -24,13 +25,15 @@ const TimeBlockCardSchema = new mongoose.Schema({
     },
     host_employee: {
         type: String,
-        required: [true, 'host employee is required'],
-        minlength: [3, 'host employee name should be more than 3 characters']
+        enum: ['Employee 1','Employee 2','Employee 3', 'Employee 4','Employee 5'],
+        required: [true, 'Host employee is required'],
+        // minlength: [3, 'host employee name should be more than 3 characters']
     },
     gm_employee: {
         type: String,
-        required: [true, 'gm employee is required'],
-        minlength: [3, 'gm employee name should be more than 3 characters']
+        enum: ['Employee 1','Employee 2','Employee 3', 'Employee 4','Employee 5'],
+        required: [true, 'Game master is required'],
+        // minlength: [3, 'gm employee name should be more than 3 characters']
     }
     }, 
     {timestamps: true}
