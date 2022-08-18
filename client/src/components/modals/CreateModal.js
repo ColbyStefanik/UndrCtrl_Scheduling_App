@@ -5,9 +5,6 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-
-
-
 const CreateModal = () => {
   const [gameName, setGameName] = useState("")
   const [date, setDate] = useState("")
@@ -29,13 +26,12 @@ const CreateModal = () => {
     axios.post("http://localhost:8000/api/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Created Succesfully', response);
-      // navigate("/api/calendar");
+      navigate("/api/calendar/month");
   })
   .catch((err) => {
       console.log(err)
       setErrors(err.response.data.error.errors);
   });
-    
   }
 
   return (
