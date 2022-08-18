@@ -13,6 +13,8 @@ module.exports = {
     },
     getTimeBlockCardById: (req, res) => {
         TimeBlockCard.findOne({ _id: req.params.id })
+        .populate('hostEmployee')
+        .populate('gmEmployee')
         .then((timeBlockCard) => {
             res.json(timeBlockCard);
         })

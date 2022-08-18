@@ -7,7 +7,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+require('dotenv').config();
 require("./config/mongoose.config");
 require("./routes/TimeBlockCard.routes")(app);
+require("./routes/User.routes")(app);
 
 app.listen(port, () => console.log(`Listening on port: ${port}`) );

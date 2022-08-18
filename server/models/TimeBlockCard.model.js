@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var ObjectId = require('mongodb').ObjectId;
 
 const TimeBlockCardSchema = new mongoose.Schema({
     gameName: {
@@ -23,17 +24,13 @@ const TimeBlockCardSchema = new mongoose.Schema({
         // min: [1, 'invalid end time'],
         // max: [24, 'invalid end time']
     },
-    hostEmployee: {
-        type: String,
-        enum: ['Employee 1','Employee 2','Employee 3', 'Employee 4','Employee 5'],
-        required: [true, 'Host employee is required'],
-        // minlength: [3, 'host employee name should be more than 3 characters']
+    hostEmployee: { 
+        type : ObjectId, 
+        ref: "User",
     },
-    gmEmployee: {
-        type: String,
-        enum: ['Employee 1','Employee 2','Employee 3', 'Employee 4','Employee 5'],
-        required: [true, 'Game master is required'],
-        // minlength: [3, 'gm employee name should be more than 3 characters']
+    gmEmployee: { 
+        type : ObjectId, 
+        ref: "User",
     }
     }, 
     {timestamps: true}
