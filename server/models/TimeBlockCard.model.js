@@ -25,12 +25,12 @@ const TimeBlockCardSchema = new mongoose.Schema({
     host_employee: {
         type: String,
         required: [true, 'host employee is required'],
-        minlength: [3, 'host employee name should be more than 2 characters']
+        minlength: [3, 'host employee name should be more than 3 characters']
     },
     gm_employee: {
         type: String,
         required: [true, 'gm employee is required'],
-        minlength: [3, 'gm employee name should be more than 2 characters']
+        minlength: [3, 'gm employee name should be more than 3 characters']
     }
     }, 
     {timestamps: true}
