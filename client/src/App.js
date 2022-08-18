@@ -6,15 +6,15 @@ import CreateModal from './components/modals/CreateModal';
 
 function App() {
   return (
-    <div className="container-fluid-xl">
+    <div className="container">
       <div className="row">
         <div className="col">
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<CreateModal />} />
-              <Route path="/" element={<MonthView />} />
-              <Route path="/" element={<WeekView />} />
-              <Route path="/" element={<DayView />} />
+              <Route path="/api/calendar/create" element={<CreateModal />} /> 
+              <Route path="/api/calendar/month" element={<MonthView />} />
+              {/* <Route path="/" element={<WeekView />} />
+              <Route path="/" element={<DayView />} /> */}
             </Routes>
           </BrowserRouter>
         </div>
