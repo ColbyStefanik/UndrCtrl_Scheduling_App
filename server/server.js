@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const port = 8000;
 
+const jwt = require('jsonwebtoken');
+
 app.use(cookieParser());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json());

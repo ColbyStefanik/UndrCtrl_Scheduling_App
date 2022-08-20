@@ -3,6 +3,8 @@ import WeekView from './components/calendar_views/WeekView'
 import DayView from './components/calendar_views/DayView'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import CreateModal from './components/modals/CreateModal';
+import Register from './components/login_and_regs/Register';
+import Login from './components/login_and_regs/Login';
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
         <div className="col">
           <BrowserRouter>
             <Routes>
-              <Route path="/api/calendar/create" element={<CreateModal />} /> 
-              <Route path="/api/calendar/month" element={<MonthView />} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="/login" element={<Login/>} />
+              <Route path="/calendar/create" element={<CreateModal />} /> 
+              <Route path="/calendar/month" element={<MonthView />} />
               {/* <Route path="/" element={<WeekView />} />
               <Route path="/" element={<DayView />} /> */}
             </Routes>
