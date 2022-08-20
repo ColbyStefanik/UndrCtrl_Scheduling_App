@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -13,6 +13,8 @@ const CreateModal = () => {
   const [hostEmployee, setHostEmployee] = useState("")
   const [gmEmployee, setGmEmployee] = useState("")
 
+  const [userList, setUserList] = useState([])
+
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
@@ -21,12 +23,22 @@ const CreateModal = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() =>{
+    axios.get("http://localhost:8000/api/user/")
+    .then((res=>{
+        console.log(res);
+        console.log(res.data);
+        setUserList(res.data);
+    }))
+    .catch((err)=>console.log(err))
+}, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:8000/api/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
+    axios.post("http://localhost:8000/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Created Succesfully', response);
-      navigate("/api/calendar/month");
+      navigate("/calendar/month");
   })
   .catch((err) => {
       console.log(err)
@@ -87,11 +99,9 @@ const CreateModal = () => {
           <Form.Label>Host: </Form.Label>
           <Form.Select value={hostEmployee} onChange={(e) => setHostEmployee(e.target.value)} aria-label="Select a Host">
             <option defaultValue>Select a Host</option>
-            <option value="Employee 1">Employee 1</option>
-            <option value="Employee 2">Employee 2</option>
-            <option value="Employee 3">Employee 3</option>
-            <option value="Employee 4">Employee 4</option>
-            <option value="Employee 5">Employee 5</option>
+            {userList.map((user, index) => (
+              <option value={`${user._id}`}>{user.name}</option>
+            ))}
           </Form.Select>
           {errors.hostEmployee ? <p className="text-danger">{errors.hostEmployee.message}</p> : null}
         </Form.Group>
@@ -100,11 +110,9 @@ const CreateModal = () => {
           <Form.Label>Game master: </Form.Label>
           <Form.Select value={gmEmployee} onChange={(e) => setGmEmployee(e.target.value)} aria-label="Select a Game Master">
             <option defaultValue>Select a Game Master</option>
-            <option value="Employee 1">Employee 1</option>
-            <option value="Employee 2">Employee 2</option>
-            <option value="Employee 3">Employee 3</option>
-            <option value="Employee 4">Employee 4</option>
-            <option value="Employee 5">Employee 5</option>
+            {userList.map((user, index) => (
+              <option value={`${user._id}`}>{user.name}</option>
+            ))}
           </Form.Select>
           {errors.gmEmployee ? <p className="text-danger">{errors.gmEmployee.message}</p> : null}
         </Form.Group>
