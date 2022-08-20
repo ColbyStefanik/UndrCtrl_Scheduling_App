@@ -35,7 +35,7 @@ const CreateModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:8000/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
+    axios.post("http://localhost:8000/api/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Created Succesfully', response);
       navigate("/calendar/month");
