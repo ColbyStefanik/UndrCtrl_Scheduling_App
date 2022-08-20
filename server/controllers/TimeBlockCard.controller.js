@@ -23,6 +23,31 @@ module.exports = {
             res.status(400).json({ message: 'something went wrong in find TimeBlockCard by ID', error: err });
         });
     },
+    getTimeBlockCardByMonth: (req, res) => {
+        let start = new Date(req.params.month);
+        let month = start.getMonth() + 3;
+        let year = start.getFullYear();
+        let end = new Date(year +"-"+month);
+
+        TimeBlockCard.find({date: {"$gte": start, "$lt": end}})
+        .then((timeBlockCards) => {
+            res.json(timeBlockCards);
+        })
+        .catch((err) => {
+            console.log('ERROR IN Get TimeBlockCard by Month', err);
+            res.status(400).json({ message: 'something went wrong in find TimeBlockCard by Month', error: err });
+        });
+    },
+    getTimeBlockCardByDay: (req, res) => {
+        TimeBlockCard.find({date: new Date(req.params.day)})
+        .then((timeBlockCards) => {
+            res.json(timeBlockCards);
+        })
+        .catch((err) => {
+            console.log('ERROR IN Get TimeBlockCard by Day', err);
+            res.status(400).json({ message: 'something went wrong in find TimeBlockCard by Day', error: err });
+        });
+    },
     createTimeBlockCard: (req, res) => {
         TimeBlockCard.create(req.body)
         .then((timeBlockCard) => {
