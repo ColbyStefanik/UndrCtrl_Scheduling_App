@@ -10,7 +10,7 @@ const MonthView = () => {
   return (
     <div className="App">
         
-      <FullCalendar
+      {/* <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         customButtons={{
@@ -26,7 +26,7 @@ const MonthView = () => {
             center: 'dayGridMonth,timeGridWeek,timeGridDay new',
           }}
         
-      />
+      /> */}
     </div>  )
 }
 
