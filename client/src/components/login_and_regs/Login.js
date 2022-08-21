@@ -30,7 +30,6 @@ const Login = (props) => {
     return (
         <div>
             <Card className="text-center shadow m-5" >
-                {/* <Card.Header>Featured</Card.Header> */}
                 <Card.Body>
                     <Card.Title>LOGIN</Card.Title>
                     <Form>
