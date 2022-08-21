@@ -48,6 +48,16 @@ module.exports = {
             res.status(400).json({ message: 'something went wrong in find TimeBlockCard by Day', error: err });
         });
     },
+    getTimeBlockCardByRange: (req, res) => {
+        TimeBlockCard.find({date: {"$gte": new Date(req.params.start), "$lt": new Date(req.params.end)}})
+        .then((timeBlockCards) => {
+            res.json(timeBlockCards);
+        })
+        .catch((err) => {
+            console.log('ERROR IN Get TimeBlockCard by Month', err);
+            res.status(400).json({ message: 'something went wrong in find TimeBlockCard by Month', error: err });
+        });
+    },
     createTimeBlockCard: (req, res) => {
         TimeBlockCard.create(req.body)
         .then((timeBlockCard) => {
