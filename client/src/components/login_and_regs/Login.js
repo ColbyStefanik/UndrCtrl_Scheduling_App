@@ -17,7 +17,7 @@ const Login = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8000/api/calendar/login', {email, password})
+        axios.post('http://localhost:8000/api/user/login', {email, password})
             .then(res=>{
                 console.log(res);
                 console.log(res.data);
