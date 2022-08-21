@@ -20,7 +20,6 @@ const Register = (props) => {
             .then(res=>{
                 console.log(res);
                 console.log(res.data);
-
                 navigate("/calendar/month");
             })
             .catch((err) => setErrors(err.response.data.error.errors))     

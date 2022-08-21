@@ -25,7 +25,7 @@ const UpdateModal = () => {
     const handleShow = () => setShow(true);
 
   useEffect(() =>{
-    axios.get(`http://localhost:8000/api/user/details/${id}`)
+    axios.get(`http://localhost:8000/api/calendar/details/${id}`)
     .then((response => {
         console.log(response)
         setGameName(response.data.gameName)
@@ -40,7 +40,7 @@ const UpdateModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.put(`http://localhost:8000/api/user/update/${id}`, {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
+    axios.put(`http://localhost:8000/api/calendar/update/${id}`, {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Created Succesfully', response);
       navigate("/calendar/month");

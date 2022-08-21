@@ -24,7 +24,7 @@ const CreateModal = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() =>{
-    axios.get("http://localhost:8000/api/user/")
+    axios.get("http://localhost:8000/api/calendar/")
     .then((res=>{
         console.log(res);
         console.log(res.data);
