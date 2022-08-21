@@ -1,4 +1,5 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
+import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -6,11 +7,13 @@ import interactionPlugin from '@fullcalendar/interaction';
 import CreateModal from '../modals/CreateModal';
 
 const MonthView = () => {
+
+  const [eventList, setEventList] = useState([])
     
   return (
     <div className="App">
         
-      <FullCalendar
+      {/* <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         customButtons={{
@@ -26,7 +29,7 @@ const MonthView = () => {
             center: 'dayGridMonth,timeGridWeek,timeGridDay new',
           }}
         
-      />
+      /> */}
     </div>  )
 }
 

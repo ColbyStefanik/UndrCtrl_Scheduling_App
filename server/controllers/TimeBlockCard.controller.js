@@ -29,7 +29,7 @@ module.exports = {
         let year = start.getFullYear();
         let end = new Date(year +"-"+month);
 
-        TimeBlockCard.find({date: {"$gte": start, "$lt": end}})
+        TimeBlockCard.find({date: {"$gte": start, "$lte": end}})
         .then((timeBlockCards) => {
             res.json(timeBlockCards);
         })
@@ -49,7 +49,9 @@ module.exports = {
         });
     },
     getTimeBlockCardByRange: (req, res) => {
-        TimeBlockCard.find({date: {"$gte": new Date(req.params.start), "$lt": new Date(req.params.end)}})
+        let start = new Date(req.params.start);
+        start.setUTCHours(0);
+        TimeBlockCard.find({date: {"$gte": start, "$lte": new Date(req.params.end)}})
         .then((timeBlockCards) => {
             res.json(timeBlockCards);
         })

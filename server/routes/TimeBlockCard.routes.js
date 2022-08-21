@@ -2,6 +2,7 @@ const TimeBlockCardController = require('../controllers/TimeBlockCard.controller
 
 module.exports = (app) => {
     app.get('/api/calendar', TimeBlockCardController.getTimeBlockCards);
+    app.get('/api/calendar/range/:start/:end', TimeBlockCardController.getTimeBlockCardByRange); //YYYY-MM-DD/YYYY-MM-DD
     app.get('/api/calendar/week/:start/:end', TimeBlockCardController.getTimeBlockCardByRange); //YYYY-MM-DD/YYYY-MM-DD
     app.get('/api/calendar/day/:day', TimeBlockCardController.getTimeBlockCardByDay); //YYYY-MM-DD
     app.get('/api/calendar/month/:month', TimeBlockCardController.getTimeBlockCardByMonth); //YYYY-MM or YYYY-MM-DD
