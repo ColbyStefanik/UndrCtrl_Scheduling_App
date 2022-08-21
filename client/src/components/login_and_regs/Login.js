@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Login = (props) => {
     const {usersList, setUsersList} = props;
@@ -14,7 +17,7 @@ const Login = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8000/api/user/login', {email, password})
+        axios.post('http://localhost:8000/api/calendar/login', {email, password})
             .then(res=>{
                 console.log(res);
                 console.log(res.data);
@@ -26,25 +29,27 @@ const Login = (props) => {
     
     return (
         <div>
-            <div className="login_box">
-                <h3>Login</h3>
-                <div className="form-group">
-                    <form onSubmit={onSubmitHandler}>
-                        <div className='bold-font'>
-                            <label>Email:</label><br/>
-                            <input type="text" value={email} onChange = {(e)=>setEmail(e.target.value)}/>
-                        </div>
-                        {errors.email && <span style={{color:"red"}}>{errors.email.message}</span>}
-                        <div>
-                            <label>Password:</label><br/>
-                            <input type="password" value={password} onChange = {(e)=>setPassword(e.target.value)}/>
-                        </div>
-                        {errors && <span style={{color:"red"}}>{errors.message}</span>}
-                        <br/>
-                        <button variant="contained" type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
+            <Card className="text-center shadow m-5" >
+                {/* <Card.Header>Featured</Card.Header> */}
+                <Card.Body>
+                    <Card.Title>LOGIN</Card.Title>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="email">
+                            <Form.Control value={email} onChange = {(e)=>setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                            {errors.email && <span style={{color:"red"}}>{errors.email.message}</span>}
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Control value={password} onChange = {(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
+                            {errors && <span style={{color:"red"}}>{errors.message}</span>}
+                        </Form.Group>
+                        <Button variant="primary" type="submit" onClick={onSubmitHandler}>Login</Button>
+                    </Form>
+                    
+                </Card.Body>
+                <Card.Footer className="text-muted">
+                <Link to="/register" className="btn btn-clear">Register</Link>
+                </Card.Footer>
+            </Card>
         </div>
     )
 }
