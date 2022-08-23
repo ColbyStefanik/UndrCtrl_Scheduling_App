@@ -50,7 +50,8 @@ const Register = (props) => {
                             <Form.Control value={confirmPassword} onChange = {(e)=>setConfirmPassword(e.target.value)} type="password" placeholder="Confirm Password" />
                             {errors.confirmPassword && <span style={{color:"red"}}>{errors.confirmPassword.message}</span>}
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={onSubmitHandler}>Register</Button>
+                        <Button variant="primary" type="submit" onClick={onSubmitHandler} className="m-2">Register</Button>
+                        <Link to="/login" className="btn btn-secondary">Cancel</Link>
                     </Form>
                     
                 </Card.Body>
