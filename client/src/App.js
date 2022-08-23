@@ -1,6 +1,4 @@
 import MonthView from './components/calendar_views/MonthView'
-import WeekView from './components/calendar_views/WeekView'
-import DayView from './components/calendar_views/DayView'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import CreateModal from './components/modals/CreateModal';
 import Register from './components/login_and_regs/Register';
