@@ -5,8 +5,9 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 
-const UpdateModal = () => {
-    const {id} = useParams()
+const UpdateModal = (props) => {
+    const {id} = props;
+    //const {id} = useParams()
     const [gameName, setGameName] = useState("")
     const [date, setDate] = useState("")
     const [startTime, setStartTime] = useState("")
@@ -25,24 +26,33 @@ const UpdateModal = () => {
     const handleShow = () => setShow(true);
 
   useEffect(() =>{
-    axios.get(`http://localhost:8000/api/calendar/details/${id}`)
+    axios.get(`http://localhost:8000/api/calendar/${id}`)
     .then((response => {
         console.log(response)
         setGameName(response.data.gameName)
-        setDate(response.data.date)
+        let d = new Date(response.data.date);
+        setDate(d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getDate() )
         setStartTime(response.data.startTime)
         setEndTime(response.data.endTime)
-        setHostEmployee(response.data.hostEmployee)
-        setGmEmployee(response.data.GmEmployee)
+        setHostEmployee(response.data.hostEmployee.name)
+        setGmEmployee(response.data.gmEmployee.name)
+    }))
+    .catch((err)=>console.log(err))
+
+    axios.get("http://localhost:8000/api/user/")
+    .then((res=>{
+        console.log(res);
+        console.log(res.data);
+        setUserList(res.data);
     }))
     .catch((err)=>console.log(err))
 }, [id])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.put(`http://localhost:8000/api/calendar/update/${id}`, {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
+    axios.put(`http://localhost:8000/api/calendar/${id}`, {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
-      console.log('Event Created Succesfully', response);
+      console.log('Event Updated Succesfully', response);
       navigate("/calendar/month");
   })
   .catch((err) => {
@@ -54,7 +64,7 @@ const UpdateModal = () => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Create Event
+        Update
       </Button>
 
       <Modal
@@ -64,7 +74,7 @@ const UpdateModal = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Create Event</Modal.Title>
+          <Modal.Title>Update Event</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           

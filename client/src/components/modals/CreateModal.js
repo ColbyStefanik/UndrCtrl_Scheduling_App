@@ -24,7 +24,7 @@ const CreateModal = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() =>{
-    axios.get("http://localhost:8000/api/calendar/")
+    axios.get("http://localhost:8000/api/user/")
     .then((res=>{
         console.log(res);
         console.log(res.data);
@@ -38,7 +38,17 @@ const CreateModal = () => {
     axios.post("http://localhost:8000/api/calendar", {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Created Succesfully', response);
+      setGameName("");
+      setDate("");
+      setStartTime("");
+      setEndTime("");
+      setHostEmployee("");
+      setGmEmployee("");
+
       navigate("/calendar/month");
+
+      //this.setState({ show_user_modal: false});
+      //this.setState({ showModal: false });
   })
   .catch((err) => {
       console.log(err)
