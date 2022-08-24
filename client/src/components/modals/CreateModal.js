@@ -47,8 +47,7 @@ const CreateModal = () => {
 
       navigate("/calendar/month");
 
-      //this.setState({ show_user_modal: false});
-      //this.setState({ showModal: false });
+      setShow(false);
   })
   .catch((err) => {
       console.log(err)

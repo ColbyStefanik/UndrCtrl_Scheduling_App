@@ -54,6 +54,8 @@ const UpdateModal = (props) => {
     .then(response => {
       console.log('Event Updated Succesfully', response);
       navigate("/calendar/month");
+
+      setShow(false);
   })
   .catch((err) => {
       console.log(err)
