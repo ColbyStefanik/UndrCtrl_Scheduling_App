@@ -17,7 +17,13 @@ const EventList = () => {
         .then((res=>{
             console.log(res);
             console.log(res.data);
-            setEventList(res.data);
+
+            for(let i=0; i < res.data.length;i++){
+                let d = new Date(res.data[i].date);
+                res.data[i].date = d.toDateString();
+                console.log(res.data[i].date);
+            }
+            setEventList(res.data);            
         }))
         .catch((err)=>console.log(err))
     }, [])
@@ -40,6 +46,7 @@ const EventList = () => {
                         <thead>
                             <tr>
                                 <th>Game Name</th>
+                                <th>Date</th>
                                 <th>Start</th>
                                 <th>End</th>
                                 <th>Update</th>
@@ -50,6 +57,7 @@ const EventList = () => {
                             {eventList.map((event, index) => (
                                 <tr>
                                     <th><Link to={`/calendar/update/${event._id}`}>{event.gameName}</Link></th>
+                                    <th>{event.date}</th>
                                     <th>{event.startTime}</th>
                                     <th>{event.endTime}</th>
                                     <th><UpdateModal id={event._id}/></th>
