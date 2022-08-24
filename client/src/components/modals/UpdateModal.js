@@ -34,8 +34,8 @@ const UpdateModal = (props) => {
         setDate(d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getDate() )
         setStartTime(response.data.startTime)
         setEndTime(response.data.endTime)
-        setHostEmployee(response.data.hostEmployee.name)
-        setGmEmployee(response.data.gmEmployee.name)
+        setHostEmployee(response.data.hostEmployee._id)
+        setGmEmployee(response.data.gmEmployee._id)
     }))
     .catch((err)=>console.log(err))
 
