@@ -32,7 +32,7 @@ const EventList = () => {
         axios.delete(`http://localhost:8000/api/calendar/${id}`)
         .then((res)=>{
             console.log(res.data);
-            navigate("/calendar/month");
+            setEventList(eventList.filter((event, index)=>event._id !== id));
         })
         .catch((err)=>console.log(err))
     }
