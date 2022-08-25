@@ -53,9 +53,10 @@ const UpdateModal = (props) => {
     axios.put(`http://localhost:8000/api/calendar/${id}`, {gameName, date, startTime, endTime, hostEmployee, gmEmployee})
     .then(response => {
       console.log('Event Updated Succesfully', response);
-      navigate("/calendar/month");
 
       setShow(false);
+        
+      window.location.reload(false);
   })
   .catch((err) => {
       console.log(err)
