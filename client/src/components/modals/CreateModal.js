@@ -45,9 +45,9 @@ const CreateModal = () => {
       setHostEmployee("");
       setGmEmployee("");
 
-      navigate("/calendar/month");
-
       setShow(false);
+      
+      window.location.reload(false);
   })
   .catch((err) => {
       console.log(err)
